@@ -1,10 +1,6 @@
 //Currying challenge (#1)
 
-function power(base) {
-  return function(exp) {
-    return Math.pow(base, exp);
-  };
-};
+const power = (base) => (exp) => Math.pow(base, exp);
 
 console.log(power(2)(8));
 
