@@ -10,8 +10,18 @@ const cart = [
   { name: 'Scissors', quantity: 6, price: 1.99 },
 ]
 
-const quantities = cart.map((product) => (product.quantity * product.price));
+Array.prototype.myMap = function(fn) {
+  const newArray = [];
+
+  for(let i = 0; i < this.length; i++) {
+    newArray.push(fn(this[i], i, this));
+  }
+
+  return newArray;
+}
+
+const quantities = cart.myMap((product) => (product.quantity * product.price));
 console.log(quantities);
 
-const names = cart.map((product) => (product.name));
+const names = cart.myMap((product) => (product.name));
 console.log(names);
