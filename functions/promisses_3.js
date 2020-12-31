@@ -21,4 +21,4 @@ function generateNumbers() {
   ]);
 }
 
-generateNumbers().then(numbers => console.log(numbers));
+generateNumbers().then(numbers => console.log('List: ',numbers));
