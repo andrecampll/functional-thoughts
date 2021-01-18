@@ -31,3 +31,5 @@ function changePerson(person) {
 const newPerson = changePerson(person);
 
 console.log(newPerson, person);
+
+// Object.freeze()
