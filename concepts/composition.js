@@ -6,8 +6,12 @@
 
 function composition(...fns) {
   return function(value) {
-    return fns.reduce((acc, fn) => {
-      return fn(acc);
+    return fns.reduce(async (acc, fn) => {
+      if (Promise.resolve(acc) === acc) {
+        return fn(await acc);
+      } else {
+        return fn(acc);
+      }
     }, value);
   }
 }
@@ -21,13 +25,25 @@ function shout(text) {
 }
 
 function slow(text) {
-  return text.split('').join(' ');
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(text.split('').join(' '));
+    }, 3000);
+  });
 }
 
-const result = composition(
+const extremely = composition(
   scream,
   shout,
   slow
-)('hey');
+);
 
-console.log(result);
+const ALittleBitExtreme = composition(
+  scream,
+  shout,
+);
+
+extremely('hey').then(console.log);
+
+ALittleBitExtreme('how are you?')
+  .then(console.log);
